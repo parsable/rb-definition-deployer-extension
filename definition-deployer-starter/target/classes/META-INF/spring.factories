@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableConfiguration=\
+  org.activiti.cloud.definitiondeployer.configuration.DefinitionDeployerAutoConfiguration
