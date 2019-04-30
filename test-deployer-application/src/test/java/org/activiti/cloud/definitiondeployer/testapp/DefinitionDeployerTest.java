@@ -1,6 +1,6 @@
 package org.activiti.cloud.definitiondeployer.testapp;
 
-import org.activiti.cloud.definitiondeployer.behavior.DefinitionDeployer;
+import org.activiti.cloud.definitiondeployer.behavior.service.DefinitionDeployer;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;

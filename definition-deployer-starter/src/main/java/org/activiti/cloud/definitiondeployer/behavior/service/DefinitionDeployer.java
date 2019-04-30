@@ -1,4 +1,4 @@
-package org.activiti.cloud.definitiondeployer.behavior;
+package org.activiti.cloud.definitiondeployer.behavior.service;
 
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
