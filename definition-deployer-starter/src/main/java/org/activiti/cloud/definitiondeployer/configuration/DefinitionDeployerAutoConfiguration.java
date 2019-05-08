@@ -1,5 +1,6 @@
 package org.activiti.cloud.definitiondeployer.configuration;
 
+import org.activiti.cloud.definitiondeployer.behavior.controller.DefinitionDeployerController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -18,5 +19,11 @@ public class DefinitionDeployerAutoConfiguration {
     public DefinitionDeployerConfig definitionDeployerConfig() {
         // when configuration parameters become relevant, set them here
         return new DefinitionDeployerConfig();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public DefinitionDeployerController definitionDeployerController() {
+        return new DefinitionDeployerController();
     }
 }
