@@ -20,6 +20,8 @@
                 <groupId>org.activiti.cloud</groupId>
                 <artifactId>definition-deployer-starter</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -40,10 +42,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.activiti.cloud</groupId>
+            <groupId>org.activiti.cloud.common</groupId>
             <artifactId>activiti-cloud-services-test</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency>        
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>

@@ -1,14 +1,15 @@
 package org.activiti.cloud.definitiondeployer.testapp;
 
-import org.activiti.cloud.api.process.model.CloudProcessDefinition;
-import org.activiti.cloud.definitiondeployer.behavior.service.DefinitionDeployer;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.TaskService;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.List;
+
+import org.activiti.cloud.services.test.identity.keycloak.interceptor.KeycloakTokenProducer;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
-import org.h2.store.fs.FileUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,23 +17,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.io.Resource;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.io.File;
-import java.io.IOException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.util.StreamUtils;
-
-import java.net.http.HttpHeaders;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = TestApp.class)
@@ -43,7 +33,7 @@ public class DefinitionDeployerIT {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private KeycloackTokenProcuder
+    private KeycloakTokenProducer pro;
 
     @Value("classpath:/org/activiti/cloud/definitiondeployer/TestProcess.bpmn20.xml")
     Resource bpmnFile;
