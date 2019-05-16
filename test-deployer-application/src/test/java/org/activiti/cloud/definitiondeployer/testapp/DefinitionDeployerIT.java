@@ -7,6 +7,9 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 import org.activiti.cloud.services.test.identity.keycloak.interceptor.KeycloakTokenProducer;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
@@ -20,12 +23,13 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StreamUtils;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = TestApp.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext
 public class DefinitionDeployerIT {
 
@@ -33,7 +37,16 @@ public class DefinitionDeployerIT {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private KeycloakTokenProducer pro;
+    private RepositoryService repositoryService;
+
+    @Autowired
+    private RuntimeService runtimeService;
+
+    @Autowired
+    private TaskService taskService;
+
+    @Autowired
+    private KeycloakTokenProducer keycloakSecurityContextClientRequestInterceptor;
 
     @Value("classpath:/org/activiti/cloud/definitiondeployer/TestProcess.bpmn20.xml")
     Resource bpmnFile;
@@ -55,7 +68,8 @@ public class DefinitionDeployerIT {
         HttpEntity<String> requestBody = new HttpEntity(bpmnXml, headers);
 
         //when
-        String deploymentId = restTemplate.exchange(deployUrl, HttpMethod.POST, requestBody, String.class);
+        ResponseEntity<String> deploymentIdResponse = restTemplate.exchange(deployUrl, HttpMethod.POST, requestBody, String.class);
+        String deploymentId = deploymentIdResponse.getBody();
 
         // then
         assertThat(deploymentId).isNotNull();

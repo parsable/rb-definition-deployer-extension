@@ -15,6 +15,17 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>alfresco</id>
+            <name>Activiti Releases</name>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
     <modules>
         <module>test-deployer-application</module>
         <module>definition-deployer-starter</module>
@@ -25,7 +36,7 @@
             <dependency>
                 <groupId>org.activiti.cloud.build</groupId>
                 <artifactId>activiti-cloud-dependencies-parent</artifactId>
-                <version>${project.version}</version>
+                <version>${parent.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
