@@ -1,4 +1,6 @@
-# DEPRECATED #
+# DEPRECATED
+This project has been deprecated. The code is no longer being maintained and
+there are no instances running in production or staging. 
 
 # Activiti Cloud Runtime Bundle Starter :: Definition Deployer
 
